@@ -1,12 +1,14 @@
-fn main() {
-    let data = aoc::read_as_string(String::from("./input.txt"));
-    println!("part1: {:?}", solve1(&data).unwrap());
-    println!("part2: {:?}", solve2(&data));
-}
+use std::fs;
 
-fn solve1(data: &str) -> Option<i32> {
+fn main() {
+    println!("running code from the day");
+    let data = fs::read_to_string(String::from("./src/bin/d01.txt")).expect("file not found");
+    task1(&data);
+    task2(&data);
+}
+fn task1(input: &str) -> Option<i32> {
     // find the elf carrying the most calories:
-    let elves: Vec<&str> = data.split("\n\n").collect();
+    let elves: Vec<&str> = input.split("\n\n").collect();
     let mut result: Vec<i32> = Vec::new();
     for elf in elves {
         let mut sum = 0;
@@ -15,12 +17,12 @@ fn solve1(data: &str) -> Option<i32> {
         }
         result.push(sum);
     }
+    println!("task1: {:?}", result.iter().max().copied().unwrap());
     result.iter().max().copied()
 }
-
-fn solve2(data: &str) -> i32 {
+fn task2(input: &str) -> i32 {
     // find the top 3 elves carrying the most calories:
-    let elves: Vec<&str> = data.split("\n\n").collect();
+    let elves: Vec<&str> = input.split("\n\n").collect();
     let mut result: Vec<i32> = Vec::new();
     for elf in elves {
         let mut sum = 0;
@@ -41,5 +43,6 @@ fn solve2(data: &str) -> i32 {
         sum += a;
     }
 
+    println!("task 2: {:?}", sum);
     sum
 }
