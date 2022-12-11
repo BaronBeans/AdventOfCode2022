@@ -9,17 +9,24 @@ use std::{
 const CARGO_ROOT: &str = env!("CARGO_MANIFEST_DIR");
 
 const FILE_CONTENTS: &str = r#"
+use std::fs;
+
 fn main() {
-    println!("running code from the day");
-    // task1();
-    // task2();
+    let file = fs::read_to_string("./src/bin/d00.txt").unwrap();
+    println!("{}", file.as_str());
+    task1(&file);
+    task2(&file);
 }
-// fn task1(input: &str) {
-//     todo!()
-// }
-// fn task2(input: &str) {
-//     todo!()
-// }
+
+fn task1(input: &str) {
+    dbg!(input);
+    todo!()
+}
+
+fn task2(input: &str) {
+    dbg!(input);
+    todo!()
+}
 "#;
 
 fn main() {
@@ -41,7 +48,6 @@ fn main() {
     input_path.push(&input_file_name);
 
     if rust_path.exists() {
-        // println!("file exists - running binary");
         Command::new("cargo")
             .arg("run")
             .arg("--release")
@@ -55,7 +61,8 @@ fn main() {
     } else {
         println!("creating file");
         let mut file = File::create(rust_path).unwrap();
-        file.write_all(FILE_CONTENTS.as_bytes()).unwrap();
+        file.write_all(FILE_CONTENTS.replace("d00", &base_file_name).as_bytes())
+            .unwrap();
         File::create(input_path).unwrap();
     }
 
