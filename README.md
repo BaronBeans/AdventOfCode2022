@@ -2,5 +2,5 @@
 
 Problems solved in Rust
 
-To generate a new day from template, go into the aoc directory and run `cargo run`
-You will be promted to enter the day number and this will generate a new cargo bin project for you.
+To use this project, run `cargo run` from the root of the project.
+This will prompt you to enter a day number, if the solution exists for that day it will run the solution, otherwise it will generate a template for that day's solution.
