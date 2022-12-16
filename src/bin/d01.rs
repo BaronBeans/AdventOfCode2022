@@ -6,7 +6,7 @@ fn main() {
     task2(&data);
 }
 
-fn task1(input: &str) -> Option<i32> {
+fn task1(input: &str) {
     // find the elf carrying the most calories:
     let elves: Vec<&str> = input.split("\n\n").collect();
     let mut result: Vec<i32> = Vec::new();
@@ -17,11 +17,11 @@ fn task1(input: &str) -> Option<i32> {
         }
         result.push(sum);
     }
-    println!("task1: {:?}", result.iter().max().copied().unwrap());
-    result.iter().max().copied()
+    let sum = result.iter().max().copied().unwrap();
+    dbg!(sum);
 }
 
-fn task2(input: &str) -> i32 {
+fn task2(input: &str) {
     // find the top 3 elves carrying the most calories:
     let elves: Vec<&str> = input.split("\n\n").collect();
     let mut result: Vec<i32> = Vec::new();
@@ -44,6 +44,5 @@ fn task2(input: &str) -> i32 {
         sum += a;
     }
 
-    println!("task 2: {:?}", sum);
-    sum
+    dbg!(sum);
 }
