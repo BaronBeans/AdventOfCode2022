@@ -8,14 +8,15 @@ use std::{
 
 const CARGO_ROOT: &str = env!("CARGO_MANIFEST_DIR");
 
-const FILE_CONTENTS: &str = r#"
+const FILE_CONTENTS: &str = r#"#![allow(dead_code)]
+#![allow(unused_variables)]
+
 use std::fs;
 
 fn main() {
     let file = fs::read_to_string("./src/bin/d00.txt").unwrap();
-    println!("{}", file.as_str());
     task1(&file);
-    task2(&file);
+    // task2(&file);
 }
 
 fn task1(input: &str) {
@@ -23,10 +24,10 @@ fn task1(input: &str) {
     todo!()
 }
 
-fn task2(input: &str) {
-    dbg!(input);
-    todo!()
-}
+// fn task2(input: &str) {
+//     dbg!(input);
+//     todo!()
+// }
 "#;
 
 fn main() {
@@ -38,6 +39,7 @@ fn main() {
     let base_file_name = format!("d{}", day_input.trim());
     let rust_file_name = format!("{}.rs", base_file_name);
     let input_file_name = format!("{}.txt", base_file_name);
+    let test_input_file_name = format!("{}.test", base_file_name);
     let mut rust_path = PathBuf::from_str(CARGO_ROOT).unwrap();
     rust_path.push("src");
     rust_path.push("bin");
@@ -46,6 +48,10 @@ fn main() {
     input_path.push("src");
     input_path.push("bin");
     input_path.push(&input_file_name);
+    let mut test_input_path = PathBuf::from_str(CARGO_ROOT).unwrap();
+    test_input_path.push("src");
+    test_input_path.push("bin");
+    test_input_path.push(&test_input_file_name);
 
     if rust_path.exists() {
         Command::new("cargo")
@@ -64,6 +70,7 @@ fn main() {
         file.write_all(FILE_CONTENTS.replace("d00", &base_file_name).as_bytes())
             .unwrap();
         File::create(input_path).unwrap();
+        File::create(test_input_path).unwrap();
     }
 
     std::process::exit(exitcode::OK);
