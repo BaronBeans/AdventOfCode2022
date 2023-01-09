@@ -21,12 +21,10 @@ fn main() {
 
 fn task1(input: &str) {
     dbg!(input);
-    todo!()
 }
 
 // fn task2(input: &str) {
 //     dbg!(input);
-//     todo!()
 // }
 "#;
 
